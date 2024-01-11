@@ -14,7 +14,7 @@ const schemaStudent = mongoose.Schema({
         default: Date.now()
     }
 })
-const modelStudent = mongoose.model("student", schemaStudent);
+const modelStudent = mongoose.model("students", schemaStudent);
 export default modelStudent;
 
 

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import ModelStudent from "../mudels/student.js"
 import modelStudent from "../mudels/student.js";
 
 
@@ -15,8 +14,8 @@ const getAllStudent = async (req, res) => {
             let ex1 = new RegExp(`${search}`);
         filter.name = ex1;}
             
-        // let allStudent = await ModelStudent.find({_name:es1})
-        let allStudent = await ModelStudent.find(filter)
+        // let allStudent = await modelStudent.find({_name:es1})
+        let allStudent = await modelStudent.find(filter)
             .skip(page * (perPage - 1))
             .limit(perPage);
         res.json(allStudent);
@@ -36,7 +35,7 @@ const getByID = async (req, res) => {
         if (!mongoose.isValidObjectId(id))
             return res.status(400).json({ type: "id error", message: "id is not valid" })
 
-        student = await ModelStudent.findOne(id);
+        student = await modelStudent.findOne(id);
 
         if (!student)
             return res.status(400).json({ type: "id error", message: "id is not appear" })
@@ -59,7 +58,7 @@ const addStudent = async (req, res) => {
         let sameStudent = await modelStudent.findOne({ name, grade });
         if (sameStudent)
             return res.status(400).json({ type: "database error", message: "there is same student" })
-        let newStudent = await ModelStudent.create({ name, grade });
+        let newStudent = await modelStudent.create({ name, grade });
         res.json(newStudent);
     }
     catch {
@@ -76,7 +75,7 @@ const deleteStudentByID = async (req, res) => {
         if (!mongoose.isValidObjectId(id))
             return res.status(400).json({ type: "id error", message: "id is not valid" })
 
-        let deleteStudent = await ModelStudent.findByIdAndDelete(id);
+        let deleteStudent = await modelStudent.findByIdAndDelete(id);
         if (!deleteStudent)
             return res.status(400).json({ type: "id error", message: "student is not appear" })
         res.json(deleteStudent);
@@ -95,11 +94,11 @@ const updateStudent = async (req, res) => {
         if (!mongoose.isValidObjectId(id))
             return res.status(400).json({ type: "id error", message: "id is not valid" })
 
-        let updateStudent = await ModelStudent.findById(id);
+        let updateStudent = await modelStudent.findById(id);
         if (!updateStudent)
             return res.status(400).json({ type: "id error", message: "student is not appear" })
-        await ModelStudent.findByIdandUpdate(id, req.body);
-        updateStudent = await ModelStudent.findById(id);
+        updateStudent= await modelStudent.findByIdAndApdate(id,req.body);
+        //  = await modelStudent.findById(id);
         res.json(updateStudent);
     }
     catch {

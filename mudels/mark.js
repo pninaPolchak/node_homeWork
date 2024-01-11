@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const schemaMark=mongoose.Schema({
+export const schemaMark=mongoose.Schema({
     profetion:{
         type:String,
         require:true
     },
     mark:Number,
 })
-const modelMark=mongoose.model("marks",schemaMark);
-export default modelMark;
+export const modelMark=mongoose.model("marks",schemaMark);
+
  
