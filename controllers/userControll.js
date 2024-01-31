@@ -36,7 +36,7 @@ export const login = async (req, res) => {
         if (!user || !await compare(req.body.password, user.password))
             res.status(404).json({ type: "there is no user with this details", message: "please add yourself" })
             let token = generateToken(user)
-            return res.json({ token })  
+            return res.json({ token, userName: user.userName})  
     }
     catch (err) {
         res.status(400).json({ type: "error", message: err.message })

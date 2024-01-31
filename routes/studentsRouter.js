@@ -4,7 +4,6 @@ import { authorized } from "../middelwares/authorized.js";
 
 const router = express.Router();
 
-
 router.get("/",getAllStudent )
 
 router.get("/:id",getByID)

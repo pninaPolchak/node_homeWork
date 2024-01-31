@@ -20,10 +20,10 @@ app.use(printDate,printMethod)
 
 app.use(morgan("common"));
 
+app.use(express.json());
 
+app.use(cors({ origin: "http://127.0.0.1:5400", methods: "*" }))
 
-app.use(express.json())
-app.use(cors({origin:"http://127.0.0.1:5400" ,methods:"*"}))
 app.use("/api/students",studentRouter);
 
 app.use("/api/marks",marksRouter);
